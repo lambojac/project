@@ -10,11 +10,18 @@ const UserController = {
   },
 
   createUser: async (req, res) => {
+    const {firstName, lastName, username, password, email, phone,timezone,language}=req.body
+    if(!firstName||!lastName||!username||!password||!email||!phone||!timezone||!language){
+    res.status(400)
+    throw new Error("All fields mustbe filled correctly")
+      }
+      console.log(firstName)
     try {
-      const newUser = await User.create(req.body);
-      res.json(newUser);
+      const newUser = await User.create({firstName, lastName, username, password, email, phone, timezone, language});
+      res.status(201).json(newUser);
     } catch (error) {
-      res.status(500).json({ error: 'Server error' });
+      res.status(500).json({message:error.message})
+      
     }
   },
 
