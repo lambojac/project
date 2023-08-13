@@ -15,7 +15,7 @@ const UserController = {
     res.status(400)
     throw new Error("All fields mustbe filled correctly")
       }
-      console.log(firstName)
+      
     try {
       const newUser = await User.create({firstName, lastName, username, password, email, phone, timezone, language});
       res.status(201).json(newUser);
